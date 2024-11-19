@@ -49,10 +49,10 @@ public class Deck {
         cardsLeft = deck.size();
         for (int i = deck.size(); i > 0; i--){
             int a = i;
-            int b = int(Math.random() * deck.size());
+            int b = (int)(Math.random() * deck.size());
             int temp = a;
-            a = b;
-            b = temp;
+            deck.set(a, deck.get(b));
+            deck.set(b, deck.get(temp));
         }
     }
 }
