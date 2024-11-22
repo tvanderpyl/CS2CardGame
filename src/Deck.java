@@ -8,6 +8,7 @@ public class Deck {
         String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
         String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
         int[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
+        deck = new ArrayList<Card>();
         for (int i = 0; i < 13; i++) {
             for (int j = 0; j < 4; j++) {
                 deck.add(new Card(ranks[i], suits[j], values[i]));
@@ -18,6 +19,7 @@ public class Deck {
 
     public Deck(String[] ranks, String[] suits, int[] values){
         cardsLeft = 0;
+        deck = new ArrayList<Card>();
         for (int i = 0; i < ranks.length; i++){
             for (int j = 0; j < suits.length; j++){
                 deck.add(new Card(ranks[i], suits[j], values[i]));
@@ -42,12 +44,12 @@ public class Deck {
             return null;
         }
         cardsLeft--;
-        return deck.get(cardsLeft + 1);
+        return deck.get(cardsLeft);
     }
 
     public void shuffle(){
         cardsLeft = deck.size();
-        for (int i = deck.size(); i > 0; i--){
+        for (int i = deck.size() -1; i > 0; i--){
             int a = i;
             int b = (int)(Math.random() * deck.size());
             int temp = a;

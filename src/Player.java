@@ -12,6 +12,13 @@ public class Player {
         hand = new ArrayList<Card>();
     }
 
+    public Player(String name, int mun) {
+        points = 0;
+        this.name = name;
+        hand = new ArrayList<Card>();
+        this.mun = mun;
+    }
+
     public Player(String name, ArrayList<Card> hand) {
         points = 0;
         this.name = name;
@@ -23,6 +30,11 @@ public class Player {
         this.name = name;
         this.hand = hand;
         this.mun = mun;
+    }
+
+    public void deal(Deck deck){
+        hand.add(deck.deal());
+        hand.add(deck.deal());
     }
 
     public String getName() {
@@ -58,9 +70,10 @@ public class Player {
     }
 
     public String toString(){
-        String ret = name + "has" + points + "points\n";
+        String ret = name + " has " + points + " points\n";
         for (int i = 0; i < hand.size(); i++) {
             ret = ret + hand.get(i);
+            ret = ret + " ";
         }
         return ret;
     }
