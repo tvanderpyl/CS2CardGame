@@ -4,6 +4,7 @@ public class Deck {
     private ArrayList<Card> deck;
     private int cardsLeft;
 
+//  Creates an average 52 card deck
     public Deck() {
         String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
         String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};

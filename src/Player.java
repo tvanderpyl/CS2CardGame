@@ -49,6 +49,10 @@ public class Player {
         return hand;
     }
 
+    public Card getCard(){
+        return hand.get(0);
+    }
+
     public void setHand(ArrayList<Card> hand) {
         this.hand = hand;
     }
@@ -69,6 +73,14 @@ public class Player {
         hand.add(newCard);
     }
 
+    public int getMun() {
+        return mun;
+    }
+
+    public void newMun(int bet){
+        mun += bet;
+    }
+
     public String toString(){
         String ret = name + " has " + points + " points\n";
         for (int i = 0; i < hand.size(); i++) {
@@ -78,4 +90,3 @@ public class Player {
         return ret;
     }
 }
-

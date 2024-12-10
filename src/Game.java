@@ -1,4 +1,7 @@
+// Blackjack by Trevor van der Pyl
+
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Game {
     private Deck deck;
@@ -21,27 +24,90 @@ public class Game {
     }
 
     public int val(ArrayList<Card> hand){
+        int aces = 0;
         int value = 0;
         for (int i = 0; i < hand.size(); i++) {
-            value += hand.get(i).getValue();
+            if (hand.get(i).getValue() == 1){
+                aces++;
+            }
+            else{
+                value += hand.get(i).getValue();
+            }
+        }
+        if (aces >= 1){
+            if(value < 11){
+                value += 11;
+                aces--;
+            }
+            for (int j = 0; j < aces; j++){
+                value++;;
+            }
         }
         return  value;
     }
 
-    public void playGame() {
+    public void hit(Player player){
+        player.addCard(deck.deal());
+    }
+
+    public void shuffle(){
+        deck.shuffle();
+    }
+
+    public int pturn(){
+        while (this.val(pTwo.getHand()) < 21) {
+            System.out.println(pTwo.getHand().toString());
+            System.out.println("Do you want to hit or stand");
+            Scanner s = new Scanner(System.in);
+            if (s.nextLine().equals("hit")) {
+                this.hit(pTwo);
+            }
+            else{
+                break;
+            }
+        }
+        if(this.val(pTwo.getHand()) < 21){
+            return this.val(pTwo.getHand());
+        }
+        return 0;
+    }
+
+    public int dturn(){
+        while (this.val(pOne.getHand()) < 17){
+            this.hit(pOne);
+        }
+        if (17 < this.val(pOne.getHand()) && this.val(pOne.getHand()) < 21){
+            return this.val(pOne.getHand());
+        }
+        return 0;
+    }
+
+    public String playGame() {
         deck.shuffle();
         this.deal();
-        int valC = this.val(pOne.getHand());
-        int valP = this.val(pTwo.getHand());
-        System.out.println(valC);
-        System.out.println(valP);
-        System.out.println(pOne.toString());
-        System.out.println(pTwo.toString());
+        //Prints the one visible dealer card
+        System.out.println("Dealers card: " + pOne.getCard().toString());
+        int pval = this.pturn();
+        int cval = this.dturn();
+        if (pval == 0) {
+            System.out.println("You busted");
+            System.out.println("dealer: " + pOne.getHand());
+            return "dealer wins";
+        }
+        if (cval > pval){
+            System.out.println("dealer: "+ pOne.getHand());
+            return "dealer wins";
+        }
+        if (cval == 0 || pval > cval){
+            System.out.println("dealer: "+ pOne.getHand());
+            return "player wins";
+        }
+        return "push";
     }
 
     public static void main(String[] args) {
         Game game = new Game();
         Game.instructions();
-        game.playGame();
+        System.out.println(game.playGame());
     }
 }
