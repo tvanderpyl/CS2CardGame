@@ -20,7 +20,7 @@ public class Game {
     }
 
     public static void instructions() {
-        System.out.println("It's Blackjack Bruv");
+        System.out.println("It's Blackjack");
     }
 
     public int val(ArrayList<Card> hand){
@@ -34,16 +34,15 @@ public class Game {
                 value += hand.get(i).getValue();
             }
         }
-        if (aces >= 1){
-            if(value < 11){
+        for(int i = 0; i < aces; i++){
+            if(value + 11 <= 21){
                 value += 11;
-                aces--;
             }
-            for (int j = 0; j < aces; j++){
-                value++;;
+            else{
+                value += 1;
             }
         }
-        return  value;
+        return value;
     }
 
     public void hit(Player player){
