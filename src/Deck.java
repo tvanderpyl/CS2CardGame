@@ -6,13 +6,14 @@ public class Deck {
 
 //  Creates an average 52 card deck
     public Deck() {
-        String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
+        String[] suits = {"Spades", "Hearts", "Diamonds", "Clubs"};
         String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
         int[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
         deck = new ArrayList<Card>();
         for (int i = 0; i < 13; i++) {
             for (int j = 0; j < 4; j++) {
-                deck.add(new Card(ranks[i], suits[j], values[i]));
+                int index = i * j;
+                deck.add(new Card(ranks[i], suits[j], values[i], index));
                 cardsLeft =  52;
             }
         }
@@ -23,7 +24,7 @@ public class Deck {
         deck = new ArrayList<Card>();
         for (int i = 0; i < ranks.length; i++){
             for (int j = 0; j < suits.length; j++){
-                deck.add(new Card(ranks[i], suits[j], values[i]));
+                deck.add(new Card(ranks[i], suits[j], values[i], i*j));
                 cardsLeft++;
             }
         }

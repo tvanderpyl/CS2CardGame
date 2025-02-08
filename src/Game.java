@@ -7,11 +7,13 @@ public class Game {
     private Deck deck;
     private Player pOne;
     private Player pTwo;
+    private GameViewer window;
 
     public Game() {
         deck = new Deck();
         pOne = new Player("CPU");
         pTwo = new Player("JP", 100);
+        window = new GameViewer(this);
     }
 
     public void deal() {

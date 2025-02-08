@@ -1,12 +1,18 @@
+import javax.swing.*;
+import java.awt.*;
+
 public class Card {
     private String rank;
     private String suit;
     private int value;
+    private Image image;
 
-    public Card(String rank, String suit, int value) {
+    public Card(String rank, String suit, int value, int index) {
         this.rank = rank;
         this.suit = suit;
         this.value = value;
+        String string = "Images/" + index + ".png";
+        image = new ImageIcon(string).getImage();
     }
 
     public String getRank() {
