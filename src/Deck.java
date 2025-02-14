@@ -5,30 +5,30 @@ public class Deck {
     private int cardsLeft;
 
 //  Creates an average 52 card deck
-    public Deck() {
+    public Deck(GameViewer window) {
         String[] suits = {"Spades", "Hearts", "Diamonds", "Clubs"};
         String[] ranks = {"Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
         int[] values = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10};
         deck = new ArrayList<Card>();
         for (int i = 0; i < 13; i++) {
             for (int j = 0; j < 4; j++) {
-                int index = i * j;
-                deck.add(new Card(ranks[i], suits[j], values[i], index));
+                int index = i * 4 + j;
+                deck.add(new Card(ranks[i], suits[j], values[i], index, window));
                 cardsLeft =  52;
             }
         }
     }
 
-    public Deck(String[] ranks, String[] suits, int[] values){
-        cardsLeft = 0;
-        deck = new ArrayList<Card>();
-        for (int i = 0; i < ranks.length; i++){
-            for (int j = 0; j < suits.length; j++){
-                deck.add(new Card(ranks[i], suits[j], values[i], i*j));
-                cardsLeft++;
-            }
-        }
-    }
+//    public Deck(String[] ranks, String[] suits, int[] values){
+//        cardsLeft = 0;
+//        deck = new ArrayList<Card>();
+//        for (int i = 0; i < ranks.length; i++){
+//            for (int j = 0; j < suits.length; j++){
+//                deck.add(new Card(ranks[i], suits[j], values[i], i*j));
+//                cardsLeft++;
+//            }
+//        }
+//    }
 
     public boolean isEmpty(){
         if (deck.isEmpty()){

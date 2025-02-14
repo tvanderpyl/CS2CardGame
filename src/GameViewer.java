@@ -7,12 +7,14 @@ public class GameViewer extends JFrame{
     private final int TITLE_BAR_HEIGHT = 23;
     private Game game;
     private Image board;
+    private Image back;
     public GameViewer(Game game) {
 
         // Initialize instance variables.
         // TODO: initialize the View's instance variables.
         this.game = game;
         board = new ImageIcon("Images/table.jpg").getImage();
+        back = new ImageIcon("Images/back.png").getImage();
 
         // Setup the window and the buffer strategy.
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -23,5 +25,14 @@ public class GameViewer extends JFrame{
 
     public void paint(Graphics g){
         g.drawImage(board, 0, 0, 1000, 700, this);
+        for (int i = 0; i < game.getCPUCHand().size(); i++){
+            g.drawImage(game.getCPUCHand().get(i).getImage(), 100 + 150 * i, 100, 100, 140, this);
+        }
+        if (!game.getDone()){
+            g.drawImage(back, 250, 100, 100, 140, this);
+        }
+        for (int i = 0; i < game.getPlayerHand().size(); i++){
+            g.drawImage(game.getPlayerHand().get(i).getImage(), 100 + 150 * i, 300, 100, 140, this);
+        }
     }
 }

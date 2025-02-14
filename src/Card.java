@@ -6,13 +6,16 @@ public class Card {
     private String suit;
     private int value;
     private Image image;
+    private GameViewer window;
 
-    public Card(String rank, String suit, int value, int index) {
+
+    public Card(String rank, String suit, int value, int index, GameViewer window) {
         this.rank = rank;
         this.suit = suit;
         this.value = value;
-        String string = "Images/" + index + ".png";
+        String string = "Images/" + (index + 1) + ".png";
         image = new ImageIcon(string).getImage();
+        this.window = window;
     }
 
     public String getRank() {
@@ -41,5 +44,13 @@ public class Card {
 
     public String toString() {
         return rank + " of " + suit;
+    }
+
+    public Image getImage(){
+        return image;
+    }
+
+    public void draw(Graphics g){
+        g.drawImage(image, 200, 100, window);
     }
 }

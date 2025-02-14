@@ -8,9 +8,10 @@ public class Game {
     private Player pOne;
     private Player pTwo;
     private GameViewer window;
+    boolean isDone = false;
 
     public Game() {
-        deck = new Deck();
+        deck = new Deck(window);
         pOne = new Player("CPU");
         pTwo = new Player("JP", 100);
         window = new GameViewer(this);
@@ -62,12 +63,14 @@ public class Game {
             Scanner s = new Scanner(System.in);
             if (s.nextLine().equals("hit")) {
                 this.hit(pTwo);
+                window.repaint();
             }
             else{
+                isDone = true;
                 break;
             }
         }
-        if(this.val(pTwo.getHand()) < 21){
+        if(this.val(pTwo.getHand()) <= 21){
             return this.val(pTwo.getHand());
         }
         return 0;
@@ -88,22 +91,42 @@ public class Game {
         this.deal();
         //Prints the one visible dealer card
         System.out.println("Dealers card: " + pOne.getCard().toString());
+        window.repaint();
         int pval = this.pturn();
         int cval = this.dturn();
         if (pval == 0) {
+            isDone = true;
+            window.repaint();
             System.out.println("You busted");
             System.out.println("dealer: " + pOne.getHand());
             return "dealer wins";
         }
         if (cval > pval){
+            isDone = true;
+            window.repaint();
             System.out.println("dealer: "+ pOne.getHand());
             return "dealer wins";
         }
         if (cval == 0 || pval > cval){
+            isDone = true;
+            window.repaint();
             System.out.println("dealer: "+ pOne.getHand());
             return "player wins";
         }
+        window.repaint();
         return "push";
+    }
+
+    public ArrayList<Card> getCPUCHand(){
+        return pOne.getHand();
+    }
+
+    public ArrayList<Card> getPlayerHand(){
+        return pTwo.getHand();
+    }
+
+    public Boolean getDone(){
+        return isDone;
     }
 
     public static void main(String[] args) {
