@@ -11,7 +11,6 @@ public class GameViewer extends JFrame{
     public GameViewer(Game game) {
 
         // Initialize instance variables.
-        // TODO: initialize the View's instance variables.
         this.game = game;
         board = new ImageIcon("Images/table.jpg").getImage();
         back = new ImageIcon("Images/back.png").getImage();
@@ -25,15 +24,19 @@ public class GameViewer extends JFrame{
 
     public void paint(Graphics g){
         g.drawImage(board, 0, 0, 1000, 700, this);
+        // Print the CPU hand
         for (int i = 0; i < game.getCPUCHand().size(); i++){
             g.drawImage(game.getCPUCHand().get(i).getImage(), 100 + 150 * i, 100, 100, 140, this);
         }
+        // Make sure only one CPU's cards is showing
         if (!game.getDone()){
             g.drawImage(back, 250, 100, 100, 140, this);
         }
+        // Draw players hand
         for (int i = 0; i < game.getPlayerHand().size(); i++){
             g.drawImage(game.getPlayerHand().get(i).getImage(), 100 + 150 * i, 400, 100, 140, this);
         }
+        // print the instructions
         if (game.getScreen() == 0){
             g.drawImage(board, 0, 0, 1000, 700, this);
             g.setColor(Color.WHITE);
@@ -41,8 +44,10 @@ public class GameViewer extends JFrame{
             g.drawString("It is blackjack", 250, 300);
             g.drawString("Type 'OK' if you understand", 250, 400);
         }
+        // print winner
         if(game.getDone()){
             g.setFont(new Font("Ariel", Font.PLAIN, 60));
+            // get and print the outcome of the game
             g.drawString(game.getFinish(), 250, 330);
         }
     }

@@ -90,6 +90,7 @@ public class Game {
     }
 
     public int getScreen(){
+        // returns the int screen so the front end knows what phase of game it is in
         return screen;
     }
 
@@ -101,6 +102,7 @@ public class Game {
         {
             window.repaint();
         }
+        // switch screen to 1 so front end knows that it is time to display the game
         screen = 1;
         //Prints the one visible dealer card
         System.out.println("Dealers card: " + pOne.getCard().toString());
@@ -154,6 +156,7 @@ public class Game {
         Game game = new Game();
         Game.instructions();
         String g = game.playGame();
+        // have to store string g in the game class in order to send it into the front end
         game.storeGame(g);
         System.out.println(g);
     }

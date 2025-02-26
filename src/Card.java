@@ -13,6 +13,7 @@ public class Card {
         this.rank = rank;
         this.suit = suit;
         this.value = value;
+        // add the card image into the card
         String string = "Images/" + (index + 1) + ".png";
         image = new ImageIcon(string).getImage();
         this.window = window;
