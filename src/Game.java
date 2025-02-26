@@ -9,12 +9,15 @@ public class Game {
     private Player pTwo;
     private GameViewer window;
     boolean isDone = false;
+    private int screen;
+    private String finish;
 
     public Game() {
         deck = new Deck(window);
         pOne = new Player("CPU");
         pTwo = new Player("JP", 100);
         window = new GameViewer(this);
+        screen = 0;
     }
 
     public void deal() {
@@ -86,9 +89,19 @@ public class Game {
         return 0;
     }
 
+    public int getScreen(){
+        return screen;
+    }
+
     public String playGame() {
         deck.shuffle();
         this.deal();
+        Scanner s = new Scanner(System.in);
+        while (!s.nextLine().equals("ok") && !s.nextLine().equals("OK"))
+        {
+            window.repaint();
+        }
+        screen = 1;
         //Prints the one visible dealer card
         System.out.println("Dealers card: " + pOne.getCard().toString());
         window.repaint();
@@ -129,9 +142,19 @@ public class Game {
         return isDone;
     }
 
+    public void storeGame(String store){
+        finish = store;
+    }
+
+    public String getFinish(){
+        return finish;
+    }
+
     public static void main(String[] args) {
         Game game = new Game();
         Game.instructions();
-        System.out.println(game.playGame());
+        String g = game.playGame();
+        game.storeGame(g);
+        System.out.println(g);
     }
 }

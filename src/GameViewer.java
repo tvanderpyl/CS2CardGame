@@ -32,7 +32,18 @@ public class GameViewer extends JFrame{
             g.drawImage(back, 250, 100, 100, 140, this);
         }
         for (int i = 0; i < game.getPlayerHand().size(); i++){
-            g.drawImage(game.getPlayerHand().get(i).getImage(), 100 + 150 * i, 300, 100, 140, this);
+            g.drawImage(game.getPlayerHand().get(i).getImage(), 100 + 150 * i, 400, 100, 140, this);
+        }
+        if (game.getScreen() == 0){
+            g.drawImage(board, 0, 0, 1000, 700, this);
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Ariel", Font.PLAIN, 50));
+            g.drawString("It is blackjack", 250, 300);
+            g.drawString("Type 'OK' if you understand", 250, 400);
+        }
+        if(game.getDone()){
+            g.setFont(new Font("Ariel", Font.PLAIN, 60));
+            g.drawString(game.getFinish(), 250, 330);
         }
     }
 }
